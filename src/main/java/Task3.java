@@ -7,20 +7,18 @@ import java.util.stream.Collectors;
 public class Task3 {
 
 
-//    Comparator<String> comparator = new Comparator<String>() {
-//        @Override
-//        public int compare(String o1, String o2) {
-//            Integer a1 = Integer.getInteger(o1);
-//            Integer a2 = Integer.getInteger(o2);
-//            return a1.compareTo(a2);
-//        }
-//    };
-    public List<String> methodForTask3(List<String> array){
+    Comparator<Integer> comparator = new Comparator<Integer>() {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o1.compareTo(o2);
+        }
+    };
+    public List<Integer> methodForTask3(List<String> array){
         return array.stream()
                 .map(str -> List.of(str.split(", ")))
                 .flatMap(Collection::stream)
-              //  .map(Integer::getInteger)
-                .sorted()
+                .map(Integer::parseInt)
+                .sorted(comparator)
                 .collect(Collectors.toList());
 
 
@@ -29,7 +27,7 @@ public class Task3 {
 
 
     public static void main(String[] args) {
-        List <String> array =List.of("1, 2, 0","4, 5");
+        List <String> array = List.of("1, 2, 0","4, 5");
         Task3 task3 = new Task3();
         System.out.println("task3.methodForTask3() = " + task3.methodForTask3(array));
     }
